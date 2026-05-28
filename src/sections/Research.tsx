@@ -5,7 +5,6 @@ import {
   FaLink, FaFileCode, FaCoins, FaShieldAlt,
 } from 'react-icons/fa';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Badge } from '@/components/ui/Badge';
 import { researchAreas } from '@/data/research';
 import type { ResearchArea } from '@/data/research';
@@ -17,7 +16,7 @@ const iconMap: Record<string, React.ReactNode> = {
   FaShieldAlt: <FaShieldAlt size={26} />,
 };
 
-function ResearchCard({ area, delay }: { area: ResearchArea; delay: number }) {
+function ResearchCard({ area, delay, wide }: { area: ResearchArea; delay: number; wide?: boolean }) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
@@ -25,15 +24,15 @@ function ResearchCard({ area, delay }: { area: ResearchArea; delay: number }) {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay }}
       whileHover={{ y: -4 }}
-      className={`relative rounded-2xl p-7 border transition-all duration-300 bg-slate-900/60 hover:bg-slate-800/60 ${
-        area.highlight
-          ? 'border-blue-500/40 shadow-lg shadow-blue-500/5'
-          : 'border-slate-700/50 hover:border-blue-500/30'
+      className={`relative rounded-2xl p-7 border transition-all duration-300 ${
+        wide
+          ? 'sm:col-span-2 bg-blue-950/20 border border-blue-500/20 hover:border-blue-500/40'
+          : 'border border-white/5 bg-white/[0.02] hover:border-blue-500/20 hover:bg-white/[0.04]'
       }`}
       aria-label={`Research area: ${area.title}`}
     >
       {area.highlight && (
-        <span className="absolute top-4 right-4 text-[10px] font-semibold text-blue-400 uppercase tracking-widest bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded-full">
+        <span className="absolute top-5 right-5 text-[10px] font-bold text-blue-400 uppercase tracking-[0.2em] bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-full">
           Primary Focus
         </span>
       )}
@@ -57,19 +56,22 @@ function ResearchCard({ area, delay }: { area: ResearchArea; delay: number }) {
 
 export function Research() {
   return (
-    <section id="research" aria-label="Research Areas" className="py-24 px-6 bg-[#04071a] grid-bg">
+    <section id="research" aria-label="Research Areas" className="py-28 px-6 section-divider" style={{ backgroundColor: '#07101f' }}>
       <div className="max-w-7xl mx-auto">
         <AnimatedSection>
-          <SectionHeader
-            eyebrow="Research"
-            title="Research Areas"
-            subtitle="My academic work focuses on the design, security, and application of blockchain-based decentralized systems."
-          />
+          <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-blue-400 mb-4 text-center">Research</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-4 leading-tight">Blockchain, AI &amp; the<br />future of trusted software</h2>
+          <p className="text-slate-400 text-center max-w-xl mx-auto mb-16">Doctoral research in blockchain technology with parallel interests in AI, automation, and modern data systems.</p>
         </AnimatedSection>
 
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-5">
           {researchAreas.map((area, idx) => (
-            <ResearchCard key={area.id} area={area} delay={idx * 0.1} />
+            <ResearchCard
+              key={area.id}
+              area={area}
+              delay={idx * 0.1}
+              wide={area.highlight}
+            />
           ))}
         </div>
       </div>

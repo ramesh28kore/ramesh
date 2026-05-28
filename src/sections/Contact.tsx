@@ -68,7 +68,7 @@ export function Contact() {
     'w-full bg-slate-800/60 border border-slate-700/60 rounded-xl px-4 py-3 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-blue-500/60 focus:ring-1 focus:ring-blue-500/30 transition-all duration-200';
 
   return (
-    <section id="contact" aria-label="Contact" className="py-24 px-6 bg-[#060b20]">
+    <section id="contact" aria-label="Contact" className="py-28 px-6 section-divider" style={{ backgroundColor: '#07101f' }}>
       <div className="max-w-7xl mx-auto">
         <AnimatedSection>
           <SectionHeader
@@ -93,7 +93,7 @@ export function Contact() {
               <div className="space-y-4">
                 <a
                   href={`mailto:${profile.email}`}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 border border-slate-700/50 hover:border-blue-500/30 transition-all duration-200 group"
+                  className="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:border-blue-500/20 transition-all duration-200 group"
                   aria-label={`Email: ${profile.email}`}
                 >
                   <div className="w-10 h-10 rounded-lg bg-blue-600/15 flex items-center justify-center text-blue-400 shrink-0">
@@ -107,7 +107,7 @@ export function Contact() {
                   </div>
                 </a>
 
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 border border-slate-700/50">
+                <div className="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/[0.02]">
                   <div className="w-10 h-10 rounded-lg bg-blue-600/15 flex items-center justify-center text-blue-400 shrink-0">
                     <FaMapMarkerAlt size={15} />
                   </div>
@@ -133,7 +133,7 @@ export function Contact() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-400 hover:text-blue-400 hover:border-blue-500/30 text-sm transition-all duration-200"
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/5 bg-white/[0.02] text-slate-400 hover:text-blue-400 hover:border-blue-500/20 text-sm transition-all duration-200"
                     >
                       {icon}
                       {label}

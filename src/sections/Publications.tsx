@@ -25,7 +25,7 @@ export function Publications() {
     : publications.filter((p) => p.type === active);
 
   return (
-    <section id="publications" aria-label="Publications" className="py-24 px-6 bg-[#060b20]">
+    <section id="publications" aria-label="Publications" className="py-28 px-6 section-divider" style={{ backgroundColor: '#050916' }}>
       <div className="max-w-5xl mx-auto">
         <AnimatedSection>
           <SectionHeader
@@ -70,7 +70,7 @@ export function Publications() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="p-6 rounded-2xl bg-slate-900/60 border border-slate-700/50 hover:border-blue-500/30 transition-all duration-300 group"
+                className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-blue-500/20 hover:bg-white/[0.03] transition-all duration-300 group"
                 aria-label={pub.title}
               >
                 <div className="flex items-start justify-between gap-4 mb-3">

@@ -19,10 +19,10 @@ export const publications: Publication[] = [
     id: 1,
     title: "Enhanced Processing Time by Managing MySQL Cluster, Apache Pig, and Apache Hive Methods",
     authors: "Kore Ramesh",
-    venue: "International Journal — update venue from publication details", // PLACEHOLDER: add journal name
-    year: 2023,  // PLACEHOLDER: update with actual year
+    venue: "International Journal — update with actual journal name and year",
+    year: 2023,
     type: "Journal",
-    doi: "#",   // PLACEHOLDER: add DOI link
+    doi: "#",
     tags: ["MySQL Cluster", "Apache Pig", "Apache Hive", "Big Data", "Processing Optimization"],
   },
 ];

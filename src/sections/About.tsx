@@ -1,120 +1,87 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { FaMapMarkerAlt, FaEnvelope, FaGraduationCap } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaDownload } from 'react-icons/fa';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { SectionHeader } from '@/components/ui/SectionHeader';
 import { profile } from '@/data/profile';
 
-function StatCard({ value, label, delay }: { value: string; label: string; delay: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, scale: 0.85 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.5, delay }}
-      className="text-center p-4 rounded-xl bg-slate-800/40 border border-slate-700/50"
-    >
-      <p className="text-2xl font-bold text-blue-400">{value}</p>
-      <p className="text-slate-400 text-xs mt-1 uppercase tracking-wide">{label}</p>
-    </motion.div>
-  );
-}
+const stats = [
+  { value: '9+',  label: 'Years Teaching' },
+  { value: '5',   label: 'Institutions' },
+  { value: '7+',  label: 'Courses Taught' },
+  { value: '4',   label: 'Certifications' },
+];
 
 export function About() {
   return (
-    <section id="about" aria-label="About" className="py-24 px-6 bg-[#060b20]">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" aria-label="About" className="py-28 px-6 section-divider" style={{ backgroundColor: '#07101f' }}>
+      <div className="max-w-6xl mx-auto">
+
+        {/* Eyebrow */}
         <AnimatedSection>
-          <SectionHeader
-            eyebrow="About Me"
-            title="Researcher, Educator & Innovator"
-            subtitle="Advancing the frontiers of blockchain technology through academic research and practical education."
-          />
+          <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-blue-400 mb-16 text-center">
+            About Me
+          </p>
         </AnimatedSection>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left — Avatar + stats */}
+        {/* Two-column: photo | bio */}
+        <div className="grid lg:grid-cols-[340px_1fr] gap-16 items-start mb-20">
+
+          {/* Left — Photo only, clean */}
           <AnimatedSection direction="left" delay={0.1}>
-            <div className="flex flex-col items-center gap-8">
-              {/* Avatar */}
-              <div className="relative">
-                <div className="w-52 h-52 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white text-6xl font-bold shadow-2xl shadow-blue-500/20">
-                  {profile.profileImage ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={profile.profileImage}
-                      alt={`${profile.name} profile photo`}
-                      className="w-full h-full object-cover rounded-2xl"
-                    />
-                  ) : (
-                    profile.initials
-                  )}
-                </div>
-                {/* Decorative ring */}
-                <div className="absolute -inset-1 rounded-2xl border border-blue-500/20 -z-10" />
-                <div className="absolute -inset-3 rounded-2xl border border-blue-500/10 -z-10" />
+            <div className="relative mx-auto lg:mx-0 w-[280px] lg:w-full">
+              {/* Subtle accent behind photo */}
+              <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/10" />
+              <div className="relative rounded-2xl overflow-hidden aspect-[3/4] bg-slate-800">
+                {profile.profileImage ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={profile.profileImage}
+                    alt={`Portrait of ${profile.name}`}
+                    className="w-full h-full object-cover object-top"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-white text-6xl font-bold gradient-text">
+                    {profile.initials}
+                  </div>
+                )}
               </div>
-
-              {/* Quick info */}
-              <div className="w-full space-y-3">
-                <div className="flex items-center gap-3 text-slate-300">
-                  <FaGraduationCap className="text-blue-400 shrink-0" size={16} />
-                  <span className="text-sm">{profile.title} · {profile.department}</span>
-                </div>
-                <div className="flex items-center gap-3 text-slate-300">
-                  <FaGraduationCap className="text-blue-400 shrink-0" size={16} />
-                  <span className="text-sm">{profile.institution}</span>
-                </div>
-                <div className="flex items-center gap-3 text-slate-300">
-                  <FaMapMarkerAlt className="text-blue-400 shrink-0" size={16} />
-                  <span className="text-sm">{profile.location}</span>
-                </div>
-                <div className="flex items-center gap-3 text-slate-300">
-                  <FaEnvelope className="text-blue-400 shrink-0" size={16} />
-                  <a
-                    href={`mailto:${profile.email}`}
-                    className="text-sm hover:text-blue-400 transition-colors"
-                  >
-                    {profile.email}
-                  </a>
-                </div>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-2 gap-3 w-full">
-                <StatCard value={`${profile.stats.yearsExperience}+`} label="Years Experience" delay={0.2} />
-                <StatCard value={`${profile.stats.publicationsCount}+`} label="Publications"     delay={0.3} />
-                <StatCard value={`${profile.stats.coursesCount}+`}     label="Courses Taught"   delay={0.4} />
-                <StatCard value={`${profile.stats.studentsCount}+`}    label="Students"          delay={0.5} />
+              {/* Name label below photo */}
+              <div className="mt-4 text-center lg:text-left">
+                <p className="text-white font-bold">{profile.name}</p>
+                <p className="text-slate-400 text-sm mt-0.5">{profile.title} · {profile.institution}</p>
               </div>
             </div>
           </AnimatedSection>
 
-          {/* Right — Bio */}
+          {/* Right — Bio content */}
           <AnimatedSection direction="right" delay={0.2}>
-            <div className="space-y-6">
-              {profile.bio.map((paragraph, idx) => (
-                <p key={idx} className="text-slate-300 leading-relaxed text-lg">
-                  {paragraph}
-                </p>
-              ))}
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-8">
+                Educator, researcher,<br />
+                <span className="gradient-text">lifelong learner.</span>
+              </h2>
 
-              <div className="pt-4 flex flex-col sm:flex-row gap-4">
+              <div className="space-y-5 mb-10">
+                {profile.bio.map((paragraph, idx) => (
+                  <p key={idx} className="text-slate-400 leading-[1.85] text-base">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-3">
                 <a
                   href={profile.cvUrl}
                   download
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/20"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-px"
                 >
-                  View Full CV
+                  <FaDownload size={12} />
+                  Download CV
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-slate-600 hover:border-blue-400 text-slate-300 hover:text-blue-400 rounded-lg font-semibold transition-all duration-200"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 hover:border-blue-400/50 text-slate-300 hover:text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:-translate-y-px"
                 >
                   Get in Touch
                 </a>
@@ -122,6 +89,26 @@ export function About() {
             </div>
           </AnimatedSection>
         </div>
+
+        {/* Stats strip */}
+        <AnimatedSection delay={0.35}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
+            {stats.map(({ value, label }) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col items-center justify-center py-8 px-4 bg-[#07101f]"
+              >
+                <span className="text-3xl font-bold text-blue-400 mb-1">{value}</span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">{label}</span>
+              </motion.div>
+            ))}
+          </div>
+        </AnimatedSection>
+
       </div>
     </section>
   );

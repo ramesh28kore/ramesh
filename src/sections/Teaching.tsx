@@ -15,12 +15,12 @@ function CourseCard({ course, delay }: { course: Course; delay: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5, delay }}
-      className="flex flex-col rounded-2xl bg-slate-900/60 border border-slate-700/50 hover:border-blue-500/30 p-6 transition-all duration-300 hover:-translate-y-1 group"
+      className="flex flex-col rounded-2xl border border-white/5 bg-white/[0.02] hover:border-blue-500/20 hover:bg-white/[0.04] p-6 transition-all duration-300 hover:-translate-y-1 group"
       aria-label={`${course.code}: ${course.name}`}
     >
       {/* Header */}
       <div className="flex items-start justify-between gap-3 mb-4">
-        <div className="w-10 h-10 rounded-lg bg-blue-600/15 border border-blue-500/20 flex items-center justify-center text-blue-400">
+        <div className="w-10 h-10 rounded-xl border border-blue-500/20 bg-blue-500/8 flex items-center justify-center text-blue-400">
           <FaChalkboardTeacher size={16} />
         </div>
         <div className="flex gap-2">
@@ -59,7 +59,7 @@ export function Teaching() {
   const pgCourses = courses.filter((c) => c.level === 'PG');
 
   return (
-    <section id="teaching" aria-label="Teaching" className="py-24 px-6 bg-[#04071a]">
+    <section id="teaching" aria-label="Teaching" className="py-28 px-6 section-divider" style={{ backgroundColor: '#07101f' }}>
       <div className="max-w-7xl mx-auto">
         <AnimatedSection>
           <SectionHeader
